@@ -1,2 +1,2 @@
 # Programs
-Contains C programs
+Contains mind-blowing C programs
