@@ -1,0 +1,56 @@
+# include <stdio.h>
+void merge_sort(int a[],int low,int high);
+void merge(int a[],int low, int mid, int high);
+int main(){
+	int arr[1000],n,i;
+	printf("\n Enter the number of elements to be sorted");
+	scanf("%d",&n);
+	printf("\n Enter the elements");
+	for(i=0;i<n;i++){
+		scanf("%d",&arr[i]);
+	}
+	printf("\n The sorted array is");
+	merge_sort(arr,0,n-1);
+	for(i=0;i<n;i++){
+		printf("\n %d",arr[i]);
+	}
+	return 0;
+}
+void merge_sort(int a[],int low,int high){
+	int mid;
+	mid = (low+high)/2;
+	if(low!=high){
+		merge_sort(a,low,mid);
+		merge_sort(a,mid+1,high);
+		merge(a,low,mid,high);
+	}
+}
+void merge(int a[],int low, int mid, int high){
+	int f=low,s=mid+1,t=low,temp[1000],i,j;
+	while(f<=mid && s<=high){
+		if(a[f]<=a[s]){
+			temp[t]=a[f];
+			f=f+1;
+		}
+		else{
+			temp[t]=a[s];
+			s=s+1;
+		}
+	    t=t+1;
+	}
+	if(f>mid){
+		for(i=s;i<=high;i++){
+			temp[t]=a[i];
+			t=t+1;
+		}
+	}
+	else{
+		for(i=f;i<=mid;i++){
+			temp[t]=a[i];
+			t=t+1;
+		}
+	}
+	for(j=low;j<=high;j++){
+		a[j]=temp[j];
+	}
+}
